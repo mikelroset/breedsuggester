@@ -2,6 +2,7 @@
   "name": "breedsuggester",
   "version": "1.0.0",
   "main": "index.js",
+  "type": "module",
   "repository": "git@github.com:mikelroset/breedsuggester.git",
   "author": "Miquel Roset",
   "license": "MIT",

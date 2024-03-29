@@ -4,9 +4,11 @@ const port = process.env.PORT || 3001;
 
 // Import routes
 import indexRoutes from "./api/routes/index.routes.js";
+import familiesRoutes from "./api/routes/families.routes.js";
 
 // Routes
 app.use(indexRoutes);
+app.use(familiesRoutes);
 
 const server = app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 

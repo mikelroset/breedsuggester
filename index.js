@@ -7,12 +7,14 @@ import indexRoutes from "./api/routes/index.routes.js";
 import familiesRoutes from "./api/routes/families.routes.js";
 import associationsRoutes from "./api/routes/associations.routes.js";
 import breedsRoutes from "./api/routes/breeds.routes.js";
+import traitsRoutes from "./api/routes/traits.routes.js";
 
 // Routes
 app.use(indexRoutes);
 app.use(familiesRoutes);
 app.use(associationsRoutes);
 app.use(breedsRoutes);
+app.use(traitsRoutes);
 
 const server = app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 

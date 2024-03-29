@@ -1,0 +1,18 @@
+{
+  "name": "breedsuggester",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:mikelroset/breedsuggester.git",
+  "author": "Miquel Roset",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  },
+  "engines": {
+    "node": ">=14"
+  }
+}

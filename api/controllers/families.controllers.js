@@ -12,9 +12,11 @@ export const createFamily = (req, res) => {
 };
 
 export const updateFamily = (req, res) => {
-    res.send('updateFamily');
+    const id = req.params.id;
+    res.send(`updateFamily ${id}`);
 };
 
 export const deleteFamily = (req, res) => {
-    res.send('deleteFamily');
+    const id = req.params.id;
+    res.send(`deleteFamily ${id}`);
 };

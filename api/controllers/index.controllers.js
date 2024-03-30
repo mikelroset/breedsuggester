@@ -1,7 +1,7 @@
 export const getHome = (req, res) => {
-    res.send('Birds home page.');
+    res.json({ "name": "Birds home page."});
 };
 
 export const getAbout = (req, res) => {
-    res.send('About birds.');
+    res.json({ "name": "About birds."});
 };

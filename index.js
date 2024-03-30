@@ -4,9 +4,13 @@ const PORT = process.env.PORT || 3001;
 
 // Import Middlewares
 import { setLanguage } from "./middlewares/language.middleware.js";
+import bodyParser from "body-parser";
 
 // Middlewares
 app.use(setLanguage);
+// Manage JSON responses
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Import routes
 import indexRoutes from "./api/routes/index.routes.js";

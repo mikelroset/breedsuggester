@@ -1,6 +1,6 @@
 import express from "express";
 const app = express();
-const port = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3001;
 
 // Import routes
 import indexRoutes from "./api/routes/index.routes.js";
@@ -16,7 +16,10 @@ app.use(associationsRoutes);
 app.use(breedsRoutes);
 app.use(traitsRoutes);
 
-const server = app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+const server = app.listen(PORT, () => {
+    console.log(`Example app listening on port ${PORT}!`);
+    console.log(`Database config: \nPORT: ${process.env.DB_HOST} \nUSER: ${process.env.DB_USER} \nPASSWORD: ${process.env.DB_PASSWORD} \nPORT: ${process.env.DB_PORT} \nNAME:${process.env.DB_NAME}`);
+});
 
 server.keepAliveTimeout = 120 * 1000;
 server.headersTimeout = 120 * 1000;

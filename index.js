@@ -2,6 +2,12 @@ import express from "express";
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+// Import Middlewares
+import { setLanguage } from "./middlewares/language.middleware.js";
+
+// Middlewares
+app.use(setLanguage);
+
 // Import routes
 import indexRoutes from "./api/routes/index.routes.js";
 import familiesRoutes from "./api/routes/families.routes.js";

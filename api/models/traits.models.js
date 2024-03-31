@@ -1,6 +1,6 @@
 import pool from "../../database/connection.js";
 
-export const getTraitsByLanguage = (language) => {
+export const findTraitsByLanguage = (language) => {
     
     return pool.query(`
         SELECT trait.id, trait.internal_name, trait_translations.language_code, trait_translations.name 
@@ -10,7 +10,7 @@ export const getTraitsByLanguage = (language) => {
         `, [language]);
 };
 
-export const getTraitById = (id, language) => {
+export const findTraitById = (id, language) => {
     
     return pool.query(`
         SELECT trait.id, trait.internal_name, trait_translations.language_code, trait_translations.name 

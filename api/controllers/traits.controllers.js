@@ -1,9 +1,12 @@
-import { getTraitsByLanguage, getTraitById } from "../models/traits.models.js";
+import { 
+    findTraitsByLanguage, 
+    findTraitById 
+} from "../models/traits.models.js";
 
 export const getTraits = async (req, res) => {
 
     try {
-        const traits = await getTraitsByLanguage(req.language);
+        const traits = await findTraitsByLanguage(req.language);
         res.json(traits[0]);
     } catch (error) {
         console.error("Error retrieving traits:", error);
@@ -20,8 +23,9 @@ export const getTrait = async (req, res) => {
     }
 
     try {
-        const trait = await getTraitById(id, req.language);
-        if (trait) {
+        const trait = await findTraitById(id, req.language);
+
+        if (trait[0].length > 0) {
             res.json(trait[0]);
         } else {
             res.status(404).send("Trait not found");

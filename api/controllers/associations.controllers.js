@@ -8,8 +8,8 @@ import {
 
 export const getAssociations = async (req, res) => {
   try {
-    const associations = await findAssociations();
-    res.json(associations[0]);
+    const result = await findAssociations();
+    res.json(result[0]);
   } catch (error) {
     console.error("Error retrieving associations:", error);
     res.status(500).send("Internal Server Error");
@@ -24,10 +24,10 @@ export const getAssociation = async (req, res) => {
   }
 
   try {
-    const association = await findAssociationById(id);
+    const result = await findAssociationById(id);
 
-    if (association[0].length > 0) {
-      res.json(association[0]);
+    if (result[0].length > 0) {
+      res.json(result[0]);
     } else {
       res.status(404).send("Association not found");
     }
@@ -45,7 +45,7 @@ export const storeAssociation = async (req, res) => {
   }
 
   try {
-    const newAssociation = await createAssociation(name, long_name);
+    const result = await createAssociation(name, long_name);
     res.status(201).send("Association created successfully");
   } catch (error) {
     console.error("Error creating association:", error);
@@ -54,7 +54,6 @@ export const storeAssociation = async (req, res) => {
 };
 
 export const editAssociation = async (req, res) => {
-  console.log("------ edit association ------");
   const id = req.params.id;
   const { name, long_name } = req.body;
 
@@ -81,7 +80,6 @@ export const editAssociation = async (req, res) => {
 };
 
 export const removeAssociation = async (req, res) => {
-  console.log("------ delete association ------");
   const id = req.params.id;
 
   try {

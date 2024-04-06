@@ -30,7 +30,7 @@ export const getBreed = async (req, res) => {
   }
 
   try {
-    const result = await findBreedById(id);
+    const result = await findBreedById(id, req.language);
 
     if (result[0].length > 0) {
       res.json(result[0]);

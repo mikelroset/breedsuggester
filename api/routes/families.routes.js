@@ -1,18 +1,18 @@
 import express from "express";
 import {
-    getFamilies,
-    getFamily,
-    createFamily,
-    updateFamily,
-    deleteFamily,
-  } from "../controllers/families.controllers.js";
+  getFamilies,
+  getFamily,
+  storeFamily,
+  editFamily,
+  removeFamily,
+} from "../controllers/families.controllers.js";
 
 var router = express.Router();
 
 router.get("/families", getFamilies);
 router.get("/families/:id", getFamily);
-router.post("/families", createFamily);
-router.put("/families/:id", updateFamily);
-router.delete("/families/:id", deleteFamily);
+router.post("/families", storeFamily);
+router.put("/families/:id", editFamily);
+router.delete("/families/:id", removeFamily);
 
 export default router;

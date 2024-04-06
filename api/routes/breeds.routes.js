@@ -1,18 +1,18 @@
 import express from "express";
 import {
-    getBreeds,
-    getBreed,
-    createBreed,
-    updateBreed,
-    deleteBreed,
-  } from "../controllers/breeds.controllers.js";
+  getBreeds,
+  getBreed,
+  storeBreed,
+  editBreed,
+  removeBreed,
+} from "../controllers/breeds.controllers.js";
 
 var router = express.Router();
 
-router.get('/breeds', getBreeds);
-router.get('/breeds/:id', getBreed);
-router.post('/breeds', createBreed);
-router.put('/breeds/:id', updateBreed);
-router.delete('/breeds/:id', deleteBreed);
+router.get("/breeds", getBreeds);
+router.get("/breeds/:id", getBreed);
+router.post("/breeds", storeBreed);
+router.put("/breeds/:id", editBreed);
+router.delete("/breeds/:id", removeBreed);
 
 export default router;

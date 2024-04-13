@@ -1,3 +1,4 @@
+import { validationResult } from "express-validator";
 import {
   findTraitsByLanguage,
   findTraitById,
@@ -14,11 +15,13 @@ export const getTraits = async (req, res) => {
 };
 
 export const getTrait = async (req, res) => {
-  const id = parseInt(req.params.id);
+  const errors = validationResult(req);
 
-  if (isNaN(id)) {
-    return res.status(400).send("Invalid trait ID");
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
   }
+
+  const id = req.params.id;
 
   try {
     const result = await findTraitById(id, req.language);

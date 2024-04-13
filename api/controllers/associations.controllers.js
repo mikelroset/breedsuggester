@@ -1,3 +1,4 @@
+import { validationResult } from "express-validator";
 import {
   findAssociations,
   findAssociationById,
@@ -5,7 +6,6 @@ import {
   updateAssociationById,
   deleteAssociationById,
 } from "../models/associations.models.js";
-import { validationResult } from "express-validator";
 
 export const getAssociations = async (req, res) => {
   try {

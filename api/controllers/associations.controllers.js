@@ -5,6 +5,7 @@ import {
   updateAssociationById,
   deleteAssociationById,
 } from "../models/associations.models.js";
+import { validationResult } from "express-validator";
 
 export const getAssociations = async (req, res) => {
   try {
@@ -17,11 +18,13 @@ export const getAssociations = async (req, res) => {
 };
 
 export const getAssociation = async (req, res) => {
-  const id = parseInt(req.params.id);
+  const errors = validationResult(req);
 
-  if (isNaN(id)) {
-    return res.status(400).send("Invalid association ID");
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
   }
+
+  const id = req.params.id;
 
   try {
     const result = await findAssociationById(id);
@@ -38,11 +41,13 @@ export const getAssociation = async (req, res) => {
 };
 
 export const storeAssociation = async (req, res) => {
-  const { name, long_name } = req.body;
+  const errors = validationResult(req);
 
-  if (!name || !long_name) {
-    return res.status(400).send("Missing required fields (name, long_name)");
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
   }
+
+  const { name, long_name } = req.body;
 
   try {
     const result = await createAssociation(name, long_name);
@@ -54,6 +59,12 @@ export const storeAssociation = async (req, res) => {
 };
 
 export const editAssociation = async (req, res) => {
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
   const id = req.params.id;
   const { name, long_name } = req.body;
 
@@ -80,6 +91,12 @@ export const editAssociation = async (req, res) => {
 };
 
 export const removeAssociation = async (req, res) => {
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
   const id = req.params.id;
 
   try {

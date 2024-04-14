@@ -230,7 +230,7 @@ export const removeBreed = async (req, res) => {
   try {
     const result = await deleteBreed(id);
 
-    if (result.affectedRows === 0) {
+    if (result[0].affectedRows === 0) {
       res.status(404).send("Breed not found");
       return;
     }

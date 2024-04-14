@@ -30,7 +30,7 @@ export const validateEditAssociation = () => {
 };
 
 // Breeds validation settings
-export const validateStoreBreeds = () => {
+export const validateStoreBreed = () => {
   return [
     body("internal_name").notEmpty().isString().escape(),
     body("original_name").isString().escape(),

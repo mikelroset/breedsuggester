@@ -1,3 +1,4 @@
+import { validationResult } from "express-validator";
 import {
   findBreeds,
   findBreedById,
@@ -23,11 +24,13 @@ export const getBreeds = async (req, res) => {
 };
 
 export const getBreed = async (req, res) => {
-  const id = req.params.id;
+  const errors = validationResult(req);
 
-  if (isNaN(id)) {
-    return res.status(400).send("Invalid breed ID");
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
   }
+
+  const id = req.params.id;
 
   try {
     const result = await findBreedById(id, req.language);
@@ -44,6 +47,12 @@ export const getBreed = async (req, res) => {
 };
 
 export const storeBreed = async (req, res) => {
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
   const {
     internal_name,
     original_name,
@@ -103,6 +112,12 @@ export const storeBreed = async (req, res) => {
 };
 
 export const editBreed = async (req, res) => {
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
   const id = req.params.id;
   const {
     internal_name,
@@ -204,6 +219,12 @@ export const editBreed = async (req, res) => {
 };
 
 export const removeBreed = async (req, res) => {
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
   const id = req.params.id;
 
   try {

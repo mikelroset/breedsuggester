@@ -6,13 +6,17 @@ import {
   editFamily,
   removeFamily,
 } from "../controllers/families.controllers.js";
-
+import {
+  validateId,
+  validateStoreFamily,
+  validateEditFamily,
+} from "../../middlewares/validation.middleware.js";
 var router = express.Router();
 
 router.get("/families", getFamilies);
-router.get("/families/:id", getFamily);
-router.post("/families", storeFamily);
-router.put("/families/:id", editFamily);
-router.delete("/families/:id", removeFamily);
+router.get("/families/:id", validateId(), getFamily);
+router.post("/families", validateStoreFamily(), storeFamily);
+router.put("/families/:id", validateEditFamily(), editFamily);
+router.delete("/families/:id", validateId(), removeFamily);
 
 export default router;

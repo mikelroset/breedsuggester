@@ -1,3 +1,4 @@
+import { validationResult } from "express-validator";
 import {
   findFamilies,
   findFamilyById,
@@ -19,15 +20,16 @@ export const getFamilies = async (req, res) => {
 };
 
 export const getFamily = async (req, res) => {
-  const id = req.params.id;
-  const language = req.language;
+  const errors = validationResult(req);
 
-  if (isNaN(id)) {
-    return res.status(400).send("Invalid association ID");
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
   }
 
+  const id = req.params.id;
+
   try {
-    const result = await findFamilyById(id, language);
+    const result = await findFamilyById(id, req.language);
 
     if (result[0].length > 0) {
       res.json(result[0]);
@@ -41,6 +43,12 @@ export const getFamily = async (req, res) => {
 };
 
 export const storeFamily = async (req, res) => {
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
   const { internal_name, translations } = req.body;
 
   try {
@@ -61,6 +69,12 @@ export const storeFamily = async (req, res) => {
 };
 
 export const editFamily = async (req, res) => {
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
   const id = req.params.id;
   const { internal_name, translations } = req.body;
   let tablesUpdated = [];
@@ -94,12 +108,18 @@ export const editFamily = async (req, res) => {
 };
 
 export const removeFamily = async (req, res) => {
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
   const id = req.params.id;
 
   try {
     const result = await deleteFamily(id);
 
-    if (result.affectedRows === 0) {
+    if (result[0].affectedRows === 0) {
       res.status(404).send("Family not found");
       return;
     }

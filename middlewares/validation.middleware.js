@@ -111,3 +111,35 @@ export const validateEditBreed = () => {
     body("**.behavior").optional().isString().escape(),
   ];
 };
+
+// Families validation settings
+
+export const validateStoreFamily = () => {
+  return [
+    body("internal_name").notEmpty().isString().escape(),
+    body("translations").notEmpty().isArray(),
+    body("**.family_id").notEmpty().isInt(),
+    body("**.language_code")
+      .notEmpty()
+      .isString()
+      .isLength({ max: 5, min: 5 })
+      .withMessage("Must be a string with 5 characters"),
+    body("**.name").notEmpty().isString().escape(),
+    body("**.description").optional().isString().escape(),
+  ];
+};
+
+export const validateEditFamily = () => {
+  return [
+    body("internal_name").optional().isString().escape(),
+    body("translations").optional().isArray(),
+    body("**.family_id").optional().isInt(),
+    body("**.language_code")
+      .optional()
+      .isString()
+      .isLength({ max: 5, min: 5 })
+      .withMessage("Must be a string with 5 characters"),
+    body("**.name").optional().isString().escape(),
+    body("**.description").optional().isString().escape(),
+  ];
+};

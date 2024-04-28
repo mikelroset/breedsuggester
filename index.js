@@ -1,6 +1,6 @@
 import express from "express";
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.NODE_DOCKER_PORT || process.env.NODE_LOCAL_PORT;
 
 // Import Middlewares
 import { setLanguage } from "./middlewares/language.middleware.js";
@@ -27,8 +27,10 @@ app.use(breedsRoutes);
 app.use(traitsRoutes);
 
 const server = app.listen(PORT, () => {
-    console.log(`Example app listening on port ${PORT}!`);
-    console.log(`Database config: \nPORT: ${process.env.DB_HOST} \nUSER: ${process.env.DB_USER} \nPASSWORD: ${process.env.DB_PASSWORD} \nPORT: ${process.env.DB_PORT} \nNAME:${process.env.DB_NAME}`);
+  console.log(`Example app listening on port ${PORT}!`);
+  console.log(
+    `Database config: \nPORT: ${process.env.DB_HOST} \nUSER: ${process.env.DB_USER} \nPASSWORD: ${process.env.DB_PASSWORD} \nPORT: ${process.env.DB_PORT} \nNAME:${process.env.DB_NAME}`
+  );
 });
 
 server.keepAliveTimeout = 120 * 1000;
